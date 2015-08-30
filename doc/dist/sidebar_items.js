@@ -1,0 +1,1 @@
+sidebarNodes={"modules":[{"id":"Vimdoc"}]};fillSidebarWithNodes(sidebarNodes);

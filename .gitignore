@@ -1,0 +1,6 @@
+/_build
+/deps
+erl_crash.dump
+*.ez
+test/files/test_plugin/doc/foo.txt
+vimdoc
