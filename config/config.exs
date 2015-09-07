@@ -22,3 +22,13 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+config :help,
+  message: """
+vimdoc: vim document generator
+
+./vimdoc new <plugin name> - generate vimdoc.yml
+./vimdoc version           - show vimdoc version
+./vimdoc help              - show this help message
+./vimdoc <path>            - generate vim document
+"""

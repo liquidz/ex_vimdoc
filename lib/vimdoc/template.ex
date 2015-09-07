@@ -1,9 +1,16 @@
 defmodule Vimdoc.Template do
   @help_template ["..", "templates", "help.eex"]
+  @yaml_template ["..", "templates", "yaml.eex"]
   @textwidth     78
 
   def template_file do
     @help_template
+    |> Path.join
+    |> Path.expand(__DIR__)
+  end
+
+  def yaml_file do
+    @yaml_template
     |> Path.join
     |> Path.expand(__DIR__)
   end

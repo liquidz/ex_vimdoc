@@ -21,7 +21,7 @@ defmodule Vimdoc.Mixfile do
   end
 
   def application do
-    [applications: [:logger, :yaml_elixir, :eex]]
+    [applications: [:logger, :yaml_elixir, :eex, :mix]]
   end
 
   defp deps do

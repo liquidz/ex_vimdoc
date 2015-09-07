@@ -22,7 +22,22 @@ defmodule Vimdoc do
     end)
   end
 
-  def main(path) do
+  def main(["help"]) do
+    config = Mix.Config.read!("config/config.exs")
+    IO.puts config[:help][:message]
+  end
+
+  def main(["new", name]) do
+    tmpl = Vimdoc.Template.yaml_file
+    dest = Path.join [".", @config_yaml]
+
+    %{template: tmpl, destination: dest, name: name}
+    |> Pipette.build
+
+    IO.puts "#{@config_yaml} is generated."
+  end
+
+  def main([path]) do
     conf = read_config(path)
     tmpl = Vimdoc.Template.template_file
     dest = Path.join [path, "doc", "#{conf.name}.txt"]
@@ -36,6 +51,6 @@ defmodule Vimdoc do
     |> Dict.merge(%{template: tmpl, destination: dest})
     |> Dict.merge(Vimdoc.Template.utilities)
     |> Dict.merge(conf)
-    |> Pipette.build()
+    |> Pipette.build
   end
 end

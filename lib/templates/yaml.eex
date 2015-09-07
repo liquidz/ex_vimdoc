@@ -1,0 +1,8 @@
+---
+name: <%= @name %>
+description: FIXME
+version: 0.0.1
+author: FIXME
+license: MIT LICENSE
+exclude:
+  - .*vital.*

@@ -1,5 +1,6 @@
 defmodule VimdocTest do
   use ExUnit.Case
+  import ExUnit.CaptureIO
 
   test "read_config" do
     conf = Path.join("test", "files") |> Vimdoc.read_config
@@ -21,9 +22,26 @@ defmodule VimdocTest do
     assert res == ["b"]
   end
 
+  test "show help" do
+    config   = Mix.Config.read!("config/config.exs")
+    actual   = capture_io(fn -> Vimdoc.main(["help"]) end) |> String.strip
+    expected = config[:help][:message] |> String.strip
+
+    assert actual == expected
+  end
+
+  test "generate yaml" do
+    path   = Path.join [".", "vimdoc.yml"]
+    output = capture_io(fn -> Vimdoc.main(["new", "hello"]) end) |> String.strip
+
+    assert File.exists?(path) == true
+    assert output == "vimdoc.yml is generated."
+    File.rm! path
+  end
+
   test "main" do
     path   = ["test", "files", "test_plugin"] |> Path.join
-    status = Vimdoc.main(path)
+    status = Vimdoc.main([path])
     assert status == :ok
 
     generated = [path, "doc", "foo.txt"] |> Path.join |> File.read!
